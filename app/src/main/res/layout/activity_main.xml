@@ -11,7 +11,7 @@
         android:id="@+id/img_card1"
         android:layout_width="100dp"
         android:layout_height="0dp"
-        android:src="@drawable/c_red_joker"
+        android:src="@drawable/c_backside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
