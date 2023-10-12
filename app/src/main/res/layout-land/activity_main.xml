@@ -13,6 +13,42 @@
         android:layout_height="0dp"
         android:src="@drawable/c_backside"
         app:layout_constraintBottom_toTopOf="@id/btn_shuffle"
+        app:layout_constraintEnd_toEndOf="@id/img_card2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/img_card2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/c_backside"
+        app:layout_constraintBottom_toTopOf="@id/btn_shuffle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/img_card3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/c_backside"
+        app:layout_constraintBottom_toTopOf="@id/btn_shuffle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/img_card4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/c_backside"
+        app:layout_constraintBottom_toTopOf="@id/btn_shuffle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/img_card5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/c_backside"
+        app:layout_constraintBottom_toTopOf="@id/btn_shuffle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
