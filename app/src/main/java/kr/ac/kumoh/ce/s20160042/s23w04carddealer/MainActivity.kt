@@ -72,14 +72,15 @@ class MainActivity : AppCompatActivity() {
                 d == "hearts" || d == "diamonds" &&
                 e == "hearts" || e == "diamonds")
     }
-    private fun isRoyalStraightFlush(a: Int, b: Int, c: Int, d: Int, e: Int): Boolean {
-        return (isRed(a, b, c, d, e) && )
+
+    private fun isMountain(a: Int, b: Int, c: Int, d: Int, e: Int): Boolean {
+        return (a == 8 && b == 9 && c == 10 && d == 11 && e == 12)  // 9,10,J,Q,K
     }
-    private fun isStraightFlush(a: Int, b: Int, c: Int, d: Int, e: Int): Boolean {
-        return if()
+    private fun isBackStraight(a: Int, b: Int, c: Int, d: Int, e: Int): Boolean {
+        return (a == 0 && b == 1 && c == 2 && d == 3 && e == 4) // A,2,3,4,5
     }
     private fun isStraight(a: Int, b: Int, c: Int, d: Int, e: Int): Boolean {
-        return if(e-d==1 && d-c==1 && c-b==1 && b-a==1) // A,2,3,4,5~ 8,9,J,Q,K
+        return if(e-d==1 && d-c==1 && c-b==1 && b-a==1) // 2,3,4,5,6~ 8,9,10,J,Q
             true
         else if(a == 0 && b == 1 && c == 2 && d == 3 && e == 12)    // K,A,2,3,4
             true
@@ -87,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             true
         else if(a == 0 && b == 1 && c == 10 && d == 11 && e == 12)   // J,Q,K,A,2
             true
-        else if(a == 0 && b == 9 && c == 10 && d == 11 && e == 12)   // 9,J,Q,K,A
+        else if(a == 0 && b == 9 && c == 10 && d == 11 && e == 12)   // 10,J,Q,K,A
             true
         else
             false
@@ -136,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun cardID(c: Int):  Pair<String, Int> {
+    private fun cardID(c: Int): Pair<String, Int> {
         val shape = when(c / 13) {  // switch문 대신
             0 -> "spades"
             1 -> "diamonds"
