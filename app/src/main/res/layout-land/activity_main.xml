@@ -7,16 +7,26 @@
     android:background="#060"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="70dp"
+        android:textColor="#000"
+        android:gravity="center"
+        android:padding="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/img_card1"/>
     <ImageView
         android:id="@+id/img_card1"
         android:layout_width="0dp"
         android:layout_height="180dp"
         android:src="@drawable/c_backside"
         app:layout_constraintBottom_toTopOf="@id/btn_shuffle"
-        app:layout_constraintEnd_toEndOf="@id/img_card2"
+        app:layout_constraintEnd_toStartOf="@id/img_card2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintVertical_bias="1.2"/>
     <ImageView
         android:id="@+id/img_card2"
@@ -24,10 +34,9 @@
         android:layout_height="180dp"
         android:src="@drawable/c_backside"
         app:layout_constraintBottom_toTopOf="@id/btn_shuffle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/img_card3"
+        app:layout_constraintStart_toEndOf="@id/img_card1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintVertical_bias="1.2" />
     <ImageView
         android:id="@+id/img_card3"
@@ -35,10 +44,9 @@
         android:layout_height="180dp"
         android:src="@drawable/c_backside"
         app:layout_constraintBottom_toTopOf="@id/btn_shuffle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/img_card4"
+        app:layout_constraintStart_toEndOf="@id/img_card2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintVertical_bias="1.2" />
     <ImageView
         android:id="@+id/img_card4"
@@ -46,10 +54,9 @@
         android:layout_height="180dp"
         android:src="@drawable/c_backside"
         app:layout_constraintBottom_toTopOf="@id/btn_shuffle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/img_card5"
+        app:layout_constraintStart_toEndOf="@id/img_card3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintVertical_bias="1.2" />
     <ImageView
         android:id="@+id/img_card5"
@@ -60,7 +67,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/img_card4"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintVertical_bias="1.2" />
     <Button
         android:id="@+id/btn_shuffle"
@@ -70,7 +76,6 @@
         android:text="Good luck"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
