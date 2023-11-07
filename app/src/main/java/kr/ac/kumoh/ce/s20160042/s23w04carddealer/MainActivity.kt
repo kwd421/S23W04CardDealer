@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         for(i in 0..4)
             if(a[i] == b)
                 count++
-        return count==4
+        return count==5
     }
     private fun isClubs(a: Array<String>): Boolean {
         return shapeID(a, "clubs")
@@ -63,14 +63,14 @@ class MainActivity : AppCompatActivity() {
         for(i in 0..4)
             if(a[i] == "spades" || a[i] == "clubs")
                 count++
-        return count==4
+        return count == 5
     }
     private fun isRed(a: Array<String>): Boolean {
         var count = 0
         for(i in 0..4)
             if(a[i] == "hearts" || a[i] == "diamonds")
                 count++
-        return count==4
+        return count == 5
     }
     private fun isMountain(a: Array<Int>): Boolean {
         return (a[0] == 8 && a[1] == 9 && a[2] == 10 && a[3] == 11 && a[4] == 12)  // 9,10,J,Q,K
@@ -87,30 +87,33 @@ class MainActivity : AppCompatActivity() {
             true
         else if(a[0] == 0 && a[1] == 1 && a[2] == 10 && a[3] == 11 && a[4] == 12)   // J,Q,K,A,2
             true
-        else if(a[0] == 0 && a[1] == 9 && a[2] == 10 && a[3] == 11 && a[4] == 12)   // 10,J,Q,K,A
-            true
-        else
-            false
+        else a[0] == 0 && a[1] == 9 && a[2] == 10 && a[3] == 11 && a[4] == 12
     }
     private fun isFourCard(a: Array<Int>): Boolean {
-        //TODO: 11122일떄도 fourcard됨
-        return Counter(a) == "Four Card"
+        var (aC, aP) = pairCounter(a)
+        return (aC.contains(4))
+    }
+    private fun isFullHouse(a: Array<Int>): Boolean {
+        var (aC, aP) = pairCounter(a)
+        return (aC.contains(3) && aC.contains(2))
     }
     private fun isTriple(a: Array<Int>): Boolean {
-        //TODO: 11223일때도 triple나옴
-        return Counter(a) == "Triple"
+        var (aC, aP) = pairCounter(a)
+        return (aC.contains(3) && !aC.contains(2))
     }
     private fun isTwoPair(a: Array<Int>): Boolean {
-        //TODO: triple과 차이점
-        return Counter(a) == "Two Pair"
+        var (aC, aP) = pairCounter(a)
+        return aP == 4
     }
     private fun isOnePair(a: Array<Int>): Boolean {
-        return Counter(a) == "One Pair"
+        var (aC, aP) = pairCounter(a)
+        return aP == 2
     }
-//    private fun isTop(a: Array<Int>):Boolean {
-//        return pairCounter(a) == "Top"
-//    }
-    private fun Counter(a: Array<Int>): String{
+    private fun isTop(a: Array<Int>):Boolean {
+        var (aC, aP) = pairCounter(a)
+        return aP == 0
+    }
+    private fun pairCounter(a: Array<Int>): Pair<IntArray, Int> {
         var count = IntArray(5){0}
         var pairCount = 0
 
@@ -127,18 +130,19 @@ class MainActivity : AppCompatActivity() {
             if(count[i] == 2)
                 pairCount++ // pairCount
 
-        return if(count.contains(4))
-            return "Four Card"
-        else if(count.contains(3) && count.contains(2)) // FullHouse!!
-            return "Full House"
-        else if(count.contains(3) && !count.contains(2)) // Triple!!
-            return "Triple"
-        else if(pairCount == 4)  // abbcc, aabbc, aabcc
-            return "Two Pair"
-        else if(pairCount == 2)  // One Pair,,,
-            return "One Pair"
-        else
-            return "Top"
+        return Pair(count, pairCount)
+//        return if(count.contains(4))
+//            "Four Card"
+//        else if(count.contains(3) && count.contains(2)) // FullHouse!!
+//            "Full House"
+//        else if(count.contains(3) && !count.contains(2)) // Triple!!
+//            "Triple"
+//        else if(pairCount == 4)  // abbcc, aabbc, aabcc
+//            "Two Pair"
+//        else if(pairCount == 2)  // One Pair,,,
+//            "One Pair"
+//        else
+//            "Top"
     }
 
     private fun getCardRank(a: Int, b: Int, c: Int, d: Int, e: Int): String {
@@ -154,37 +158,39 @@ class MainActivity : AppCompatActivity() {
         val shapes = arrayOf(aS, bS, cS, dS, eS)
         val numbers = arrayOf(aN, bN, cN, dN, eN)
 
-        //return "${cardID(r[0])}"
+//        return "${cardID(r[0])}"
+        return "${aN}"  //TODO: 12 넘게나옴
 
-        return if(isBlack(shapes)&&isMountain(numbers)||
-            isRed(shapes)&&isMountain(numbers)
-            "Royal Straight Flush"
-        else if(isBlack(shapes)&&isBackStraight(numbers)||
-            isRed(shapes)&&isBackStraight(numbers)
-            "Back Straight Flush"
-        else if(isBlack(shapes)&&isStraight(numbers)||
-            isRed(shapes)&&isStraight(numbers))
-            "Straight Flush"
+        if(isBlack(shapes) && isMountain(numbers)||
+            isRed(shapes) && isMountain(numbers))
+            return "Royal Straight Flush"
+        else if(isBlack(shapes) && isBackStraight(numbers)||
+            isRed(shapes) && isBackStraight(numbers))
+            return "Back Straight Flush"
+        else if(isBlack(shapes) && isStraight(numbers)||
+            isRed(shapes) && isStraight(numbers))
+            return "Straight Flush"
         else if(isFourCard(numbers))
-            "Four Card"
-        else if()
-            "Full House"
-        else if(isHearts(shapes)||isDiamonds(shapes)||isClubs(shapes)||isSpades(shapes))
-            "Flush"
+            return "Four Card"
+        else if(isFullHouse(numbers))
+            return "Full House"
+        else if(isHearts(shapes) || isDiamonds(shapes) ||
+            isClubs(shapes) || isSpades(shapes))
+            return "Flush"
         else if(isMountain(numbers))
-            "Mountain"
+            return "Mountain"
         else if(isBackStraight(numbers))
-            "Back Straight"
+            return "Back Straight"
         else if(isStraight(numbers))
-            "Straight"
+            return "Straight"
         else if(isTriple(numbers))
-            "Triple"
+            return "Triple"
         else if(isTwoPair(numbers))
-            "Two Pair"
+            return "Two Pair"
         else if(isOnePair(numbers))
-            "One Pair"
+            return "One Pair"
         else
-            "Top"
+            return "Top"
 
         //return "${ranks[0]} ${ranks[1]} ${ranks[2]} ${ranks[3]} ${ranks[4]}"
 
