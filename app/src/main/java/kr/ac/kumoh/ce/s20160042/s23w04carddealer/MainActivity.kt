@@ -100,19 +100,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isFourCard(a: Array<Int>): Boolean {
-        return counter(a).contains(8)
+        return counter(a).contains(4)
     }
 
     private fun isFullHouse(a: Array<Int>): Boolean {
-        return (counter(a).contains(6) && counter(a).contains(2))
+        return (counter(a).contains(3) && counter(a).contains(2))
     }
 
     private fun isTriple(a: Array<Int>): Boolean {
-        return (counter(a).contains(6) && !counter(a).contains(2))
+        return (counter(a).contains(3) && !counter(a).contains(2))
     }
 
     private fun isTwoPair(a: Array<Int>): Boolean {
-        return pairCounter(a) == 2
+        return pairCounter(a) == 2 && !isFourCard(a) && !isTriple(a)
     }
 
     private fun isOnePair(a: Array<Int>): Boolean {
@@ -126,25 +126,18 @@ class MainActivity : AppCompatActivity() {
     private fun pairCounter(a: Array<Int>): Int {
         var pairCount = 0
         var c = counter(a)
-        for (i in 0..4)
+        for (i in c.indices)
             if (c[i] == 2)
                 pairCount++
         return pairCount
     }
 
     private fun counter(a: Array<Int>): IntArray {
-        var count = IntArray(5) { 0 }
-//        var pairCount = 0
+        var count = IntArray(13) { 0 }
 
-        for (i in 0..4) {
-            for (j in 0..4) {
-                if (j == i) continue
-                if (a[i] == a[j]) {
-                    count[i]++
-                    count[j]++
-                }
-            }
-        }
+        for (i in a)
+            if( i != -1)
+                count[i]++
 //        for(i in 0..4)
 //            if(count[i] == 2)
 //                pairCount++ // pairCount
@@ -173,32 +166,42 @@ class MainActivity : AppCompatActivity() {
         val (cS, cN) = cardID(r[2])
         val (dS, dN) = cardID(r[3])
         val (eS, eN) = cardID(r[4])
+//        val aS = "spades"
+//        val bS = "hearts"
+//        val cS = "diamonds"
+//        val dS = "spades"
+//        val eS = "club"
+//        val aN = 0
+//        val bN = 0
+//        val cN = 0
+//        val dN = 3
+//        val eN = 3
+
 
         val shapes = arrayOf(aS, bS, cS, dS, eS)
         val numbers = arrayOf(aN, bN, cN, dN, eN)
 
 //        return "${cardID(r[0])}"
 //        return "${aN}"
+//        return "${numbers[0]} ${numbers[1]} ${numbers[2]} ${numbers[3]} ${numbers[4]}"
 
-        if (isBlack(shapes) && isMountain(numbers) ||
-            isRed(shapes) && isMountain(numbers)
-        )
+        if(numbers.contains(-1))
+            return ""
+        else if (isBlack(shapes) && isMountain(numbers) ||
+            isRed(shapes) && isMountain(numbers))
             return "Royal Straight Flush"
         else if (isBlack(shapes) && isBackStraight(numbers) ||
-            isRed(shapes) && isBackStraight(numbers)
-        )
+            isRed(shapes) && isBackStraight(numbers))
             return "Back Straight Flush"
         else if (isBlack(shapes) && isStraight(numbers) ||
-            isRed(shapes) && isStraight(numbers)
-        )
+            isRed(shapes) && isStraight(numbers))
             return "Straight Flush"
         else if (isFourCard(numbers))
             return "Four Card"
         else if (isFullHouse(numbers))
             return "Full House"
         else if (isHearts(shapes) || isDiamonds(shapes) ||
-            isClubs(shapes) || isSpades(shapes)
-        )
+            isClubs(shapes) || isSpades(shapes))
             return "Flush"
         else if (isMountain(numbers))
             return "Mountain"
@@ -214,12 +217,7 @@ class MainActivity : AppCompatActivity() {
             return "One Pair"
         else
             return "Top"
-
-        //return "${ranks[0]} ${ranks[1]} ${ranks[2]} ${ranks[3]} ${ranks[4]}"
-
-
     }
-
     private fun cardID(c: Int): Pair<String, Int> {
         val shape = when (c / 13) {  // switch문 대신
             0 -> "spades"
